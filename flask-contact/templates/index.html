@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="row">
+
+<col-md-5 >
+
+    <div class="card card-body m-2">
+
+       
+
+    <form  action="/addcontact" method="post" >
+        <div class="form-group"> 
+        <input type="number" name="ID" placeholder="ID" class="form-control">
+        </div>
+        <div class="form-group"> 
+        <input type="text" name="fullname" placeholder="fullname" class="form-control">
+        </div>
+        <div class="form-group">
+        <input type="text" name="phone" placeholder="phone" class="form-control">
+        </div>
+        <div class="form-group"> 
+        <input type="text" name="email" placeholder="email" class="form-control">
+        </div>
+        <div class="form-group"> 
+        <button class="btn btn-primary" type="submit" class="form-control">
+        
+            Save
+        </button>
+    </div>
+        </form>
+    </div>
+
+</col-md-5>
+
+
+<col-md-7>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert" >
+    {{message}}
+    <button type="button" class="btn-close btn-primary" data-bs-dismiss="alert" aria-label="Close">close</button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<table class="table table-bordered table-md">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>fullname</td>
+            <td>phone</td>
+            <td>email</td>
+            <td>operation</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for contact in newcontact %}
+        <tr>
+        <td>{{contact.0}}</td>
+        <td>{{contact.1}}</td>
+        <td>{{contact.2}}</td>
+        <td>{{contact.3}}</td>
+        <td><a href="/edit/{{contact.0}}" class="btn btn-secondary">Edit</a></td>
+        <td><a href="/delete/{{contact.0}}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</col-md-7>
+
+</div>
+
+
+
+
+
+
+{% endblock %}
